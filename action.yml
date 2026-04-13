@@ -1,0 +1,35 @@
+name: 'SSH Run'
+description: 'Run commands on a remote server over SSH'
+
+inputs:
+  host:
+    description: 'SSH host'
+    required: true
+  user:
+    description: 'SSH user'
+    required: true
+  key:
+    description: 'SSH private key'
+    required: true
+  port:
+    description: 'SSH port'
+    required: false
+  known_hosts:
+    description: 'Known hosts entry'
+    required: false
+  script:
+    description: 'Script to execute'
+    required: true
+  timeout:
+    description: 'Connection timeout in seconds'
+    required: false
+
+outputs:
+  stdout:
+    description: 'Standard output from the remote command'
+  exit_code:
+    description: 'Exit code of the remote command'
+
+runs:
+  using: 'docker'
+  image: 'Dockerfile'
