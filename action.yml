@@ -38,7 +38,8 @@ runs:
     - name: Download ssh-action binary
       shell: bash
       run: |
-        REPO="${{ github.action_repository }}"
+        ACTION_PATH="${{ github.action_path }}"
+        REPO=$(echo "$ACTION_PATH" | grep -oP '_actions/\K[^/]+/[^/]+')
         ARCH="$(uname -m)"
         case "$ARCH" in
           x86_64)  ARCH="amd64" ;;
