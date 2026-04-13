@@ -39,14 +39,14 @@ runs:
       shell: bash
       run: |
         REPO="${{ github.action_repository }}"
-        REF="${{ github.action_ref }}"
         ARCH="$(uname -m)"
         case "$ARCH" in
           x86_64)  ARCH="amd64" ;;
           aarch64) ARCH="arm64" ;;
         esac
-        URL="https://github.com/${REPO}/releases/download/${REF}/ssh-action-linux-${ARCH}"
-        curl -sL "$URL" -o "${{ github.action_path }}/ssh-action"
+        TAG=$(curl -sI "https://github.com/${REPO}/releases/latest" | grep -i ^location: | sed 's|.*/||' | tr -d '\r')
+        URL="https://github.com/${REPO}/releases/download/${TAG}/ssh-action-linux-${ARCH}"
+        curl -sfL "$URL" -o "${{ github.action_path }}/ssh-action"
         chmod +x "${{ github.action_path }}/ssh-action"
 
     - name: Run SSH command
