@@ -1,6 +1,6 @@
 # SSH Run Action
 
-GitHub Actions 用の SSH コマンド実行アクション。
+GitHub Actions 用の SSH コマンド実行アクション。 
 
 ## 使い方
 
